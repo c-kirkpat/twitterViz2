@@ -1,5 +1,5 @@
 {
-  "name": "Project Name",
+  "name": "twitterViz",
   "version": "0.0.1",
   "description": "A review time project",
   "main": "index.js",
@@ -13,6 +13,7 @@
     "skeleton"
   ],
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.15.2",
     "chalk": "^1.1.3",
     "express": "^4.14.0",
@@ -24,7 +25,9 @@
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0",
-    "sequelize": "^4.7.4"
+    "sequelize": "^4.7.4",
+    "socket.io": "^2.0.4",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
