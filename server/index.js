@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
+// const socketio = require('socket.io');
 
 const app = express();
 
@@ -18,8 +19,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 
-//socket stuff
+// //socket stuff
 // let arr = [];
+
+
+// const io = socketio(app)
+
+// io.on('connection', function(socket) {
+//   console.log('a new client appears');
+// })
+
 // let searchWord = 'apple'
 // var client = new Twitter({
 //   consumer_key: 'mosnra91NXK5HdTey6blcXD5R',
@@ -37,12 +46,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 //   throw error;
 // });
 
-// const io = socketio(app)
-
-// io.on('connection', function(socket) {
-//   console.log('a new client appears');
-// })
-
 app.use('/api', require('./api')); // include our routes!
 
 app.get('*', (req, res) => {
@@ -55,4 +58,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error');
 });
 
-module.exports = app;
+module.exports = app

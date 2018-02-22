@@ -27,7 +27,9 @@
     "redux-thunk": "^2.1.0",
     "sequelize": "^4.7.4",
     "socket.io": "^2.0.4",
-    "twitter": "^1.7.1"
+    "socket.io-client": "^2.0.4",
+    "twitter": "^1.7.1",
+    "victory": "^0.25.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

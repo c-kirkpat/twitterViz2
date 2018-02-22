@@ -1,72 +1,66 @@
 import React, { Component } from 'react';
 //import Twitter from 'twitter';
 import {getTweet} from '../reducers/index'
-import store from '../store'
+import store from '../store';
+import openSocket from 'socket.io-client';
+import {VictoryPie} from 'victory';
+const socket = openSocket('http://localhost:1337')
+//var socket = io.connect('http://localhost');
 
-/* The code below does NOT relate to your project.
-   This code is just a nice BIG example of how you can make a component.
-   Also it is HILARIOUS :D Have fun!
- */
 
-
+function newTweet (cb) {
+  socket.on('newTweet', tweet => cb(tweet));
+}
+function newDog (cb) {
+  socket.on('newDog', dog => cb(dog));
+}
+function newCat (cb) {
+  socket.on('newCat', cat => cb(cat));
+}
 export default class Test extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      tweets: [],
+      dogs: [],
+      cats: []
+    }
+    newTweet((tweet)=>{
+      this.setState({
+        tweets: [...this.state.tweets, tweet]
+      })
+    })
+    newDog((dog) => {
+      this.setState({
+        dogs: [...this.state.dogs, dog]
+      })
+    })
+    newCat((cat) => {
+      this.setState({
+        cats: [...this.state.cats, cat]
+      })
+    })
   }
-  componentDidMount() {
-    store.dispatch(getTweet())
-    const state = store.getState()
-    this.setState({state})
-  }
+
+
+  // componentDidMount() {
+  //   store.dispatch(getTweet())
+  //   const state = store.getState()
+  //   this.setState({state})
+  // }
   render() {
-    setInterval(function(){
-      store.dispatch(getTweet())
-    }, 4000)
-    console.log(this.state);
+
     return (
       <div>
-        hello
+        <VictoryPie 
+          data={[
+            {x: 'Cats', y: this.state.cats.length},
+            {x: 'Dogs', y: this.state.dogs.length}
+          ]}
+        />
       </div>
     )
   }
 }
-
-
-// export default class WinterJokes extends Component {
-//   constructor() {
-//     super()
-//     this.nextJoke = this.nextJoke.bind(this)
-//     this.answer = this.answer.bind(this)
-//   }
-
-//   componentDidMount() {
-//     this.nextJoke()
-//   }
-
-//   nextJoke() {
-//     this.setState({
-//       joke: randomJoke(),
-//       answered: false,
-//     })
-//   }
-
-//   answer() {
-//     this.setState({answered: true})
-//   }
-
-//   render() {
-//     if (!this.state) { return null }
-
-//     const {joke, answered} = this.state    
-//     return (
-//       <div>
-//         <h1 onClick={answered ? this.nextJoke : this.answer}>{joke.q}</h1>
-//         {answered && <h2>{joke.a}</h2>}
-//       </div>
-//     )
-//   }
-// }
-
 
 
