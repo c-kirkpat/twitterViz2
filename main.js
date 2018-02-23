@@ -30,19 +30,32 @@ var client = new Twitter({
   access_token_secret: 'yRbRmgFfhkxZTYle0vSaWs1ac1RuhdCBqXc0xwt3KT5Wb',
   //timeout_ms:           60*1000
 });
-var stream = client.stream('statuses/filter', { track: 'cat, dog', filterLevel: 'medium' });
-
 io.on('connection', function (socket) {
   console.log('a new client appears');
 })
+let logged = true;
+let trackerString = 'cat, dog, pizza, donut'
+var stream = client.stream('statuses/filter', { track: trackerString, filterLevel: 'medium' });
 stream.on('data', function (event) {
   if (event.text.indexOf('cat') > -1){
     io.emit('newCat', event);
     console.log('cat')
+    if (!logged){
+      console.log(event);
+      logged = !logged;
+    }
   }
   if (event.text.indexOf('dog') > -1){
     io.emit('newDog', event);
     console.log('dog')
+  }
+  if (event.text.indexOf('pizza') > -1){
+    io.emit('newPizza', event);
+    console.log('pizza')
+  }
+  if (event.text.indexOf('donut') > -1){
+    io.emit('newDonut', event);
+    console.log('donut')
   }
   io.emit('newTweet', event)
 });
@@ -50,3 +63,65 @@ stream.on('error', function (error) {
   throw error;
 });
 
+
+
+
+
+// var stream = null;
+// var timer = null;
+// var calm = 1;
+
+// function restart(string) {
+//   calm = 1;
+//   clearTimeout(timer);
+//   if (stream !== null && stream.active) {
+//     stream.destroy();
+//   } else {
+//     init(string);
+//   }
+// }
+
+// function init(string) {
+//   clearTimeout(timer);
+//   if (stream == null || !stream.active) {
+//     client.stream('statuses/filter', {
+//       track: string
+//     }, function (stream) {
+//       clearTimeout(timer);
+//       stream = stream;
+//       stream.active = true;
+//       stream.on('data', function (event) {
+//         if (event.text.indexOf('cat') > -1){
+//           io.emit('newCat', event);
+//           console.log('cat', event.id)
+//         }
+//         if (event.text.indexOf('dog') > -1){
+//           io.emit('newDog', event);
+//           console.log('dog', event.id)
+//         }
+//         io.emit('newTweet', event)
+//       });
+//       stream.on('end', function() {
+//         stream.active = false;
+//         clearTimeout(timer);
+//         timer = setTimeout(function () {
+//           clearTimeout(timer);
+//           if (stream.active) {
+//             stream.destroy();
+//           } else {
+//             init();
+//           }
+//         }, 1000 * calm * calm);
+//       });
+//       stream.on('error', function (err) {
+//         if (err.message == 'Status Code: 420') {
+//           calm++;
+//         }
+//       });
+//     });
+//   }
+// }
+
+// init(trackerString);
+
+// restart('apple')
