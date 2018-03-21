@@ -23,13 +23,7 @@ let arr = [];
 const io = socketio(server)
 
 let searchWord = 'apple'
-var client = new Twitter({
-  consumer_key: 'mosnra91NXK5HdTey6blcXD5R',
-  consumer_secret: 'g7ZlVccvd9t292JECdgWnz7kjyowzxQvz8gn18SwBl3toBORlP',
-  access_token_key: '965694392387428359-HaOPdTjCMtpf93y7CgRrEjWXkOcoPKd',
-  access_token_secret: 'yRbRmgFfhkxZTYle0vSaWs1ac1RuhdCBqXc0xwt3KT5Wb',
-  //timeout_ms:           60*1000
-});
+var client = new Twitter(process.env.TWITTER);
 io.on('connection', function (socket) {
   console.log('a new client appears');
 })

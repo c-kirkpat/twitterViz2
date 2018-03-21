@@ -21,7 +21,6 @@ export default class Feeds extends Component {
                   <Feed.Date>{dog.created_at}</Feed.Date>
                   </Feed.Summary>
                   <Feed.Extra>{dog.text}</Feed.Extra>
-                  <Feed.Date>{dog.created_at}</Feed.Date>
                 </Feed.Content>
               </Feed.Event>
             )
@@ -47,7 +46,32 @@ export default class Feeds extends Component {
             )
           })}
         </Feed>
+ 
+
       </div>
     )
   }
 }
+
+{/* <Divider horizontal> Donuts </Divider>
+{this.props.theTweets.donuts.length > 0 ? (
+            <Feed>
+            {this.props.theTweets.donuts.slice(-5).map((donut) => {
+              return (
+                <Feed.Event
+                  key={donut.id}>
+                  <Feed.Label>
+                    <img src={donut.user.profile_image_url} />
+                  </Feed.Label>
+                  <Feed.Content>
+                    <Feed.Summary>
+                    {donut.user.name}
+                    <Feed.Date>{donut.created_at}</Feed.Date>
+                    </Feed.Summary>
+                    <Feed.Extra>{donut.text}</Feed.Extra>
+                  </Feed.Content>
+                </Feed.Event>
+              )
+            })}
+          </Feed>
+) : (<div> Waiting on donuts</div>)} */}

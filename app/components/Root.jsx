@@ -38,7 +38,7 @@ export default class Test extends Component {
       catCounter: 0,
       pizzas: [],
       pizzaCounter: 0,
-      donuts: [],
+      donuts: ['No donuts'],
       donutCounter: 0,
       selection: 'pie',
       selectionInput: '',
@@ -50,26 +50,26 @@ export default class Test extends Component {
     })
     newDog((dog) => {
       this.setState({
-        dogs: [...this.state.dogs.slice(-30), dog],
+        dogs: [...this.state.dogs.slice(-20), dog],
         dogCounter: this.state.dogCounter + 1
       })
     })
     newCat((cat) => {
       this.setState({
-        cats: [...this.state.cats.slice(-30), cat],
+        cats: [...this.state.cats.slice(-20), cat],
         catCounter: this.state.catCounter + 1
 
       })
     })
     newDonut((donut) => {
       this.setState({
-        donuts: [...this.state.donuts.slice(-30), donut],
+        donuts: [...this.state.donuts.slice(-20), donut],
         donutCounter: this.state.donutCounter + 1
       })
     })
     newPizza((pizza) => {
       this.setState({
-        pizzas: [...this.state.pizzas.slice(-30), pizza],
+        pizzas: [...this.state.pizzas.slice(-20), pizza],
         pizzaCounter: this.state.pizzaCounter + 1
       })
     })
@@ -93,7 +93,6 @@ export default class Test extends Component {
     let dogData = this.state.dogs.map((dog, i) => ({ x: i, y: dog.text.length }))
     let catData = this.state.cats.map((cat, i) => ({ x: i, y: cat.text.length }))
     let pizzaData = this.state.pizzas.map((pizza, i) => ({ x: i, y: pizza.text.length }))
-    let donutData = this.state.donuts.map((donut, i) => ({ x: i, y: donut.text.length }))
     let dataWrapper = [
       catData,
       dogData,
@@ -121,7 +120,7 @@ export default class Test extends Component {
             <Feeds theTweets={{
               dogs: this.state.dogs,
               cats: this.state.cats,
-              pizzas: this.state.pizzas
+              donuts: this.state.donuts
             }} />
           </div>
         )
@@ -155,6 +154,11 @@ export default class Test extends Component {
             <Label>Dogs: {this.state.dogCounter}</Label>
             <Label>Pizzas: {this.state.pizzaCounter}</Label>
             <Label>Donuts: {this.state.donutCounter}</Label>
+            <Feeds theTweets={{
+              dogs: this.state.dogs,
+              cats: this.state.cats,
+              pizzas: this.state.pizzas
+            }} />
           </div>
         )
       case 'area':
@@ -175,6 +179,11 @@ export default class Test extends Component {
             <Label>Dogs: {this.state.dogCounter}</Label>
             <Label>Pizzas: {this.state.pizzaCounter}</Label>
             <Label>Donuts: {this.state.donutCounter}</Label>
+            <Feeds theTweets={{
+              dogs: this.state.dogs,
+              cats: this.state.cats,
+              pizzas: this.state.pizzas
+            }} />
           </div>
         )
       default:

@@ -4,8 +4,19 @@ import { VictoryArea, VictoryStack, VictoryChart, VictoryTheme } from 'victory'
 export default class Area extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      catText: [],
+      dogText: [],
+      pizzaText: []
+    };
   }
+  // componentDidMount() {
+
+  //   this.setStateInterval = window.setInterval(() => {
+  //     this.setState({ catText, dogText, pizzaText });
+  //   }, 4000)
+  // }
+
   render() {
     let catText = this.props.pData[0] || [];
     let dogText = this.props.pData[1] || [];
@@ -15,7 +26,7 @@ export default class Area extends Component {
         <VictoryChart>
           <VictoryStack
             colorScale={"blue"}
-          >
+           >
             <VictoryArea
               data={catText}
               interpolation={"basis"}
